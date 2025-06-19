@@ -1,6 +1,6 @@
 import type { ApiSchemas } from "../../schema";
 import { http } from "../http";
-import { HttpResponse } from "msw";
+import { delay, HttpResponse } from "msw";
 
 const mockUsers: ApiSchemas["User"][] = [
   {
@@ -10,7 +10,7 @@ const mockUsers: ApiSchemas["User"][] = [
 ];
 
 const userPasswords = new Map<string, string>();
-userPasswords.set("admin@gmail.com", "123456");
+userPasswords.set("admin@gmail.com", "12345678");
 
 const mockTokens = new Map<string, string>();
 
@@ -20,6 +20,8 @@ export const authHandlers = [
 
     const user = mockUsers.find((u) => u.email === body.email);
     const storedPassword = userPasswords.get(body.email);
+
+    await delay(2000);
 
     if (!user || !storedPassword || storedPassword !== body.password) {
       return HttpResponse.json(

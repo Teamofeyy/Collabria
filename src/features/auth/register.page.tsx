@@ -1,6 +1,7 @@
 import { ROUTES } from "@/shared/model/routes";
 import { Link } from "react-router-dom";
-import { AuthLayout } from "./auth-layout";
+import { AuthLayout } from "./ui/auth-layout";
+import { RegisterForm } from "./ui/register-form";
 
 function RegisterPage() {
   return (
@@ -12,7 +13,7 @@ function RegisterPage() {
           Есть аккаунт? <Link to={ROUTES.LOGIN}>Войти</Link>
         </>
       }
-      form={<form></form>}
+      form={<RegisterForm />}
     />
   );
 }
